@@ -27,7 +27,6 @@ public final class UseCooldowns extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
         getServer().getPluginManager().registerEvents(this,this);
         setupConfig();
 

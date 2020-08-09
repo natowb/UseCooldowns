@@ -5,3 +5,9 @@ prefix: UseCooldowns
 authors: [natowb]
 description: create cooldowns for items
 website: github.com/natowb
+api-version: 1.13
+
+
+permissions:
+  usedelay.bypass:
+    default: false
