@@ -1,0 +1,6 @@
+prefix: "[&aUse Cooldowns&r]"
+itemCooldowns:
+  - "birch_sapling:100"
+potionCooldowns:
+  - "jump:100"
+  - "fire_resistance:100"

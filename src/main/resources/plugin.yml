@@ -1,0 +1,7 @@
+name: UseCooldowns
+version: ${project.version}
+main: me.natowb.usecooldowns.UseCooldowns
+prefix: UseCooldowns
+authors: [natowb]
+description: create cooldowns for items
+website: github.com/natowb

@@ -1,0 +1,30 @@
+<project name="MyProject" basedir=".">
+  <description>
+    simple example build file
+  </description>
+    <property name="src" location="src"/>
+  <target name="Build16">
+    <replace file="${src}/main/resources/plugin.yml" token="1.15" value="1.16"/>
+    <replace file="${src}/main/resources/plugin.yml" token="1.14" value="1.16"/>
+    <replace file="${src}/main/resources/plugin.yml" token="1.13" value="1.16"/>
+  </target>
+
+  <target name="Build15">
+    <replace file="${src}/main/resources/plugin.yml" token="1.16" value="1.15"/>
+    <replace file="${src}/main/resources/plugin.yml" token="1.14" value="1.15"/>
+    <replace file="${src}/main/resources/plugin.yml" token="1.13" value="1.15"/>
+  </target>
+
+  <target name="Build14">
+    <replace file="${src}/main/resources/plugin.yml" token="1.16" value="1.14"/>
+    <replace file="${src}/main/resources/plugin.yml" token="1.15" value="1.14"/>
+    <replace file="${src}/main/resources/plugin.yml" token="1.13" value="1.14"/>
+  </target>
+
+  <target name="Build13">
+    <replace file="${src}/main/resources/plugin.yml" token="1.16" value="1.13"/>
+    <replace file="${src}/main/resources/plugin.yml" token="1.15" value="1.13"/>
+    <replace file="${src}/main/resources/plugin.yml" token="1.14" value="1.13"/>
+  </target>
+
+</project>
