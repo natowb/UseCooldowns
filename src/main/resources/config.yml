@@ -1,6 +1,10 @@
 prefix: "[&aUse Cooldowns&r]"
-itemCooldowns:
+
+useCooldowns:
   - "birch_sapling:100"
-potionCooldowns:
-  - "jump:100"
-  - "fire_resistance:100"
+consumeCooldowns:
+  potions:
+    - "jump:100"
+    - "fire_resistance:100"
+  food:
+    - "golden_apple:100"

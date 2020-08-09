@@ -71,7 +71,7 @@ public final class UseCooldowns extends JavaPlugin implements Listener {
         boolean potionHasCooldown = false;
         int delay = 0;
         try {
-            for(String s : getConfig().getStringList("potionCooldowns")) {
+            for(String s : getConfig().getStringList("consumeCooldowns.potions")) {
                 String[] sArr = s.split(":");
                 if(sArr[0].equalsIgnoreCase(potion)) {
                     potionHasCooldown = true;
@@ -113,13 +113,12 @@ public final class UseCooldowns extends JavaPlugin implements Listener {
     @EventHandler
     public void consumeItem(PlayerItemConsumeEvent event) {
 
-
-
-
         Player player = event.getPlayer();
         if(event.getItem().getType() == Material.POTION) {
             String potion = ((PotionMeta)event.getItem().getItemMeta()).getBasePotionData().getType().toString();
             event.setCancelled(checkPotion(player, potion));
+        } else{
+            event.setCancelled(checkFood(event.getPlayer(), event.getItem().getType().toString()));
         }
 
 
@@ -145,6 +144,55 @@ public final class UseCooldowns extends JavaPlugin implements Listener {
 
     }
 
+    public boolean checkFood(Player player, String food) {
+
+
+        if(player.hasPermission("usedelay.bypass")) {
+            return false;
+        }
+
+        UUID pID = player.getUniqueId();
+        boolean itemHasCooldown = false;
+        int delay = 0;
+        try {
+            for(String s : getConfig().getStringList("consumeCooldowns.food")) {
+                String[] sArr = s.split(":");
+                if(sArr[0].equalsIgnoreCase(food)) {
+                    itemHasCooldown = true;
+                    delay = Integer.parseInt(sArr[1]);
+                    break;
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if(itemHasCooldown) {
+            if(cooldowns.containsKey(pID)) {
+                if(cooldowns.get(pID).contains(food)) {
+                    String p = String.valueOf(food.charAt(0)).toUpperCase();
+                    String msg = "&6 <"+ p + food.substring(1).toLowerCase()+">&c Currently on Cooldown";
+                    msg(player, msg);
+                    return true;
+                }
+                cooldowns.get(pID).add(food);
+            }
+            HashSet<String> arr = new HashSet<>();
+            arr.add(food);
+            cooldowns.put(pID, arr);
+            getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+                @Override
+                public void run() {
+                    cooldowns.get(pID).remove(food);
+                }
+            }, delay);
+
+        }
+
+        return false;
+    }
+
     public boolean checkItem(Player player, String item) {
 
 
@@ -156,7 +204,7 @@ public final class UseCooldowns extends JavaPlugin implements Listener {
         boolean itemHasCooldown = false;
         int delay = 0;
         try {
-            for(String s : getConfig().getStringList("itemCooldowns")) {
+            for(String s : getConfig().getStringList("useCooldowns")) {
                 String[] sArr = s.split(":");
                 if(sArr[0].equalsIgnoreCase(item)) {
                     itemHasCooldown = true;
