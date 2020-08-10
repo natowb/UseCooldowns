@@ -20,12 +20,14 @@
 # jump:100 -- Gives delay of 5 seconds to potions of type jump
 # fire_resistance:100 -- Gives delay of 5 seconds to potions of type fire resistance
 prefix: '[&aUse Cooldowns&r]'
-itemCooldowns:
+useCooldowns:
 - birch_sapling:100
-potionCooldowns:
-- jump:100
-- fire_resistance:100
-
+consumeCooldowns:
+  potions:
+  - jump:100
+  - fire_resistance:100
+  food:
+  - golden_apple:100
 ```
 ### Permissions
 ```YML
